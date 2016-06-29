@@ -93,7 +93,7 @@ angular.module('myApp.controllers')
 
 					async.parallel({
 							video: function (callback) {
-								_getVideo($scope.model.q.id_medium, callback);
+								_getVideo($scope.model.q.medium_id, callback);
 							},
 							serverDate: function (callback) {
 								camomileService.getDate(function (err, data) {
@@ -121,13 +121,13 @@ angular.module('myApp.controllers')
 							$scope.$apply(function () {
 								$scope.model.current_time = $scope.model.q.start;
 							});*/
-							$scope.model.current_time_temp = $scope.model.q.timestamp;
-							$scope.model.infbndsec = parseFloat($scope.model.q.timestamp || 0);
+							$scope.model.current_time_temp = $scope.model.q.t;
+							$scope.model.infbndsec = parseFloat($scope.model.q.t || 0);
 							$scope.model.infbndsec-=5.0;
 							if ($scope.model.infbndsec < 0) {
 								$scope.model.infbndsec = 0;
 							}
-							$scope.model.supbndsec = parseFloat($scope.model.q.timestamp || 0);
+							$scope.model.supbndsec = parseFloat($scope.model.q.t || 0);
 							$scope.model.supbndsec+=5.0;
 							if ($scope.model.supbndsec > $scope.model.fullDuration) {
 								$scope.model.supbndsec = $scope.model.fullDuration;
@@ -135,7 +135,7 @@ angular.module('myApp.controllers')
 							$scope.model.duration = $scope.model.supbndsec - $scope.model.infbndsec;
 
 							$scope.$apply(function () {
-								$scope.model.current_time = $scope.model.q.timestamp;
+								$scope.model.current_time = $scope.model.q.t;
 							});
 
 						});
@@ -165,7 +165,7 @@ angular.module('myApp.controllers')
 				item.input.id_shot = $scope.model.q.id_shot;
 				/*item.input.start = $scope.model.q.start;
 				item.input.end = $scope.model.q.end;*/
-				item.input.timestamp = $scope.model.q.timestamp;
+				item.input.t = $scope.model.q.t;
 
 				var b_box = {};
 				b_box.w = document.getElementById("Wbox").value;
@@ -429,7 +429,7 @@ angular.module('myApp.controllers').directive('drawing', function(){
                  Math.abs(sizeX), Math.abs(sizeY));
         ctx.lineWidth = 3;
         // color gradient
-        var gradient=ctx.createLinearGradient(Math.min(oppositeX,currentX),Math.min(oppositeY,currentY),Math.max(oppositeX,currentX),Math.max(oppositeY,currentY));
+        /*var gradient=ctx.createLinearGradient(Math.min(oppositeX,currentX),Math.min(oppositeY,currentY),Math.max(oppositeX,currentX),Math.max(oppositeY,currentY));
         gradient.addColorStop("0.05","red");
         gradient.addColorStop("0.15","blue");
         gradient.addColorStop("0.25","red");
@@ -440,9 +440,9 @@ angular.module('myApp.controllers').directive('drawing', function(){
         gradient.addColorStop("0.75","blue");
         gradient.addColorStop("0.85","red");
         gradient.addColorStop("0.95","blue");
-        ctx.strokeStyle = gradient;
+        ctx.strokeStyle = gradient;*/
         // color
-        //ctx.strokeStyle = 'red';
+        ctx.strokeStyle = 'red';
         // draw it
         ctx.stroke();
         // Launch the copy process
