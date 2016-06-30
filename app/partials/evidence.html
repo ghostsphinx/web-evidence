@@ -5,9 +5,10 @@
             </div>
             <div class="col-lg-8 col-md-12 col-xs-12">
                 <div id="video-container">
-                    <drawing id="draw" rectangle-list='rectangles'></drawing>
+                    
                     <video id="player" cm-video-player ng-src={{model.video}} height="360px" crossorigin="anonymous">
                     </video>
+                    <drawing id="draw" rectangle-list='rectangles'></drawing>
                     <div class="controls">
                         <div id="play-button">
                             <button type="button" class="video-control" id="play-pause" ng-click="model.toggle_play()">
@@ -51,16 +52,9 @@
     <canvas id="evid" style="position:relative; display:none;"></canvas>
     </br>
     <div id="evidenceImages" style="display:none;">
-        <div>
-            Evidence image preview:
-            </br>
-            <img id="evidence"/>
-        </div>
-        <div>
-            Evidence resized image preview:
-            </br>
-            <img id="evidenceSized"/>
-        </div>
+        Evidence image preview:
+        </br>
+        <img id="evidence"/>
     </div>
     </br>
     <input id="Xbox" style="display:none;">
