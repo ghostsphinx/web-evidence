@@ -133,34 +133,35 @@ angular.module('myApp.controllers')
 				item.log.duration = Date.now() - $scope.model.clientDate;
 
 				item.input = {};
-				item.input.id_submission = $scope.model.q.id_submission;
-				item.input.person_name = $scope.model.initialData;
+				item.input.corpus_id = $scope.model.q.corpus_id;
+				item.input.medium_id = $scope.model.q.medium_id;
 				item.input.modality = $scope.model.q.modality;
-				item.input.id_medium = $scope.model.q.medium_id;
-				item.input.id_shot = $scope.model.q.id_shot;
+				item.input.person_name = $scope.model.initialData;
 				item.input.t = $scope.model.q.t;
 
 				var b_box = {};
-				b_box.w = document.getElementById("Wbox").value;
-				b_box.h = document.getElementById("Hbox").value;
-				b_box.x = document.getElementById("Xbox").value;
-				b_box.y = document.getElementById("Ybox").value;
+				b_box.w = parseFloat(document.getElementById("Wbox").value);
+				b_box.h = parseFloat(document.getElementById("Hbox").value);
+				b_box.x = parseFloat(document.getElementById("Xbox").value);
+				b_box.y = parseFloat(document.getElementById("Ybox").value);
 
 				item.output = {};
-				item.output.is_evidence = isEvidence;
+				if(isEvidence) item.output.status = 'yes';
+				else{
+					item.output.status = 'no';
+				}
 				if (isEvidence) {
 					item.output.person_name = $scope.model.user_input.person_name;
-					item.output.time = $scope.model.current_time;
+					item.output.t = $scope.model.current_time;
 					item.output.image = document.getElementById('evidence').src;
-					item.output.image_sized = document.getElementById('evidenceSized').src;
 					item.output.bounding_box = b_box;
 				}
-				console.log(item);
 
 				document.getElementById('evidenceImages').style.display = "none";
 				document.getElementById('evidence').src = "";
 				document.getElementById('evidenceSized').src = "";
-				document.getElementById('draw').width = document.getElementById('draw').width;
+				console.log(document.getElementById('draw').children.length);
+				document.getElementById('draw').children[0].width = document.getElementById('draw').children[0].width;
 				document.getElementById("Wbox").value = "";
 				document.getElementById("Hbox").value = "";
 				document.getElementById("Xbox").value = "";
@@ -285,8 +286,7 @@ angular.module('myApp.controllers').directive('drawing', function(){
       var centerX;
       var centerY;
 
-      element.on('mousedown', function(event){  
-      	console.log("on lance le mousedown");
+      element.on('mousedown', function(event){ 
         reset();
         startX = event.offsetX;
         startY = event.offsetY;
@@ -397,15 +397,7 @@ angular.module('myApp.controllers').directive('drawing', function(){
         // Copy from the second canvas to the third
         ctxe.putImageData(btmp,0,0);
         //dataURI JPEG output
-        document.getElementById('evidence').src = canvasE.toDataURL("image/jpeg", 1.0);
-        // Enlarge or reduce image with fixed dimensions
-        var tmp = ctxe.getImageData(0,0,sizeX,sizeY);
-    	canvasE.width = 110;
-    	canvasE.height = 110;
-    	ctxe.putImageData(tmp,0,0,0,0,sizeX,sizeY);
-    	//dataURI JPEG output
-    	document.getElementById('evidenceSized').src = canvasE.toDataURL("image/jpeg", 1.0);
-
+        document.getElementById('evidence').src = canvasE.toDataURL("image/png", 1.0);
       }
 
     }
