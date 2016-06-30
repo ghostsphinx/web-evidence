@@ -3,28 +3,8 @@
         <div class="row top-padding">
             <div class="col-lg-2 col-md-pull-0 col-xs-pull-0">
             </div>
-            <!--<div ng-repeat="rectangle in rectangles">
-                <div class="ddd">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Who is it ?</label>
-                    <div class="col-sm-10">
-                        <input type="text" size ="50" ng-model="rectangle.name" placeholder="Put the name here" name="annot" />
-                    </div>
-                </div>
-                <br/>
-                Start:
-                <input ng-model="rectangle.startX"/>
-                <input ng-model="rectangle.startY"/>
-                <br/>
-                Size:
-                <input ng-model="rectangle.sizeX"/>
-                <input ng-model="rectangle.sizeY"/>
-                <br/>
-                </div>
-            </div>-->
             <div class="col-lg-8 col-md-12 col-xs-12">
                 <div id="video-container">
-                    <!--<div id="transparent-plan"></div>-->
                     <drawing rectangle-list='rectangles'></drawing>
                     <video id="player" cm-video-player ng-src={{model.video}} height="360px" crossorigin="anonymous">
                     </video>
@@ -70,9 +50,18 @@
     </div>
     <canvas id="evid" style="position:relative; display:none;"></canvas>
     </br>
-    Evidence image preview:
-    </br>
-    <img id="evidence" style="display:none;"/>
+    <div id="evidenceImages" style="display:none;">
+        <div>
+            Evidence image preview:
+            </br>
+            <img id="evidence"/>
+        </div>
+        <div>
+            Evidence resized image preview:
+            </br>
+            <img id="evidenceSized"/>
+        </div>
+    </div>
     </br>
     <input id="Xbox" style="display:none;">
     </br>
