@@ -160,6 +160,11 @@ angular.module('myApp.controllers')
 				document.getElementById('evidenceImages').style.display = "none";
 				document.getElementById('evidence').src = "";
 				document.getElementById('evidenceSized').src = "";
+				document.getElementById('draw').width = document.getElementById('draw').width;
+				document.getElementById("Wbox").value = "";
+				document.getElementById("Hbox").value = "";
+				document.getElementById("Xbox").value = "";
+				document.getElementById("Ybox").value = "";
 
 				camomileService.enqueue($scope.model.outgoingQueue, item, function (err, data) {
 
@@ -280,7 +285,8 @@ angular.module('myApp.controllers').directive('drawing', function(){
       var centerX;
       var centerY;
 
-      element.bind('mousedown', function(event){  
+      element.on('mousedown', function(event){  
+      	console.log("on lance le mousedown");
         reset();
         startX = event.offsetX;
         startY = event.offsetY;
@@ -292,7 +298,7 @@ angular.module('myApp.controllers').directive('drawing', function(){
         drawing = true;
       });
 
-      element.bind('mousemove', function(event){
+      element.on('mousemove', function(event){
         
         if(drawing){
         
@@ -329,7 +335,7 @@ angular.module('myApp.controllers').directive('drawing', function(){
        canvasE.width = canvasE.width;
       }
 
-      element.bind('mouseup', function(event){
+      element.on('mouseup', function(event){
         // stop drawing
         drawing = false;
         //document.getElementById('evid').style.display = "";
@@ -393,8 +399,10 @@ angular.module('myApp.controllers').directive('drawing', function(){
         //dataURI JPEG output
         document.getElementById('evidence').src = canvasE.toDataURL("image/jpeg", 1.0);
         // Enlarge or reduce image with fixed dimensions
-        canvasE.style.width = "110 px";
-    	canvasE.style.height = "110 px";
+        var tmp = ctxe.getImageData(0,0,sizeX,sizeY);
+    	canvasE.width = 110;
+    	canvasE.height = 110;
+    	ctxe.putImageData(tmp,0,0,0,0,sizeX,sizeY);
     	//dataURI JPEG output
     	document.getElementById('evidenceSized').src = canvasE.toDataURL("image/jpeg", 1.0);
 
