@@ -205,8 +205,8 @@ function create_config_file(callback) {
                 }
             );
         }
-        ],function(err, result){
-
+        ],function(err, results){
+            //nothing to do
         }
     );
     callback(null);
