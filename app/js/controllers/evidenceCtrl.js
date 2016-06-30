@@ -284,6 +284,7 @@ angular.module('myApp.controllers').directive('drawing', function(){
         reset();
         startX = event.offsetX;
         startY = event.offsetY;
+        document.getElementById("player").pause();
         
         // begins new line
         ctx.beginPath();
