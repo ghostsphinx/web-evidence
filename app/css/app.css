@@ -168,6 +168,7 @@ button.video-control {
 
 .controls {
     position: relative;
+    top: 360px;
     box-shadow: inset 0 0 0 5px #add;
     opacity: 0.5;
     transition: opacity .3s;
@@ -356,6 +357,7 @@ th.jh-key{
 }
 
 canvas.drawing{
+    position:absolute;
     width: 100%;
     height: 100%;
 }
@@ -368,4 +370,8 @@ canvas {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+video{
+    position : absolute;
 }
