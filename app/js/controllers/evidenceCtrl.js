@@ -127,6 +127,8 @@ angular.module('myApp.controllers')
 
 				var item = {};
 
+				//camomileService.me();
+
 				item.log = {};
 				item.log.user = Session.username;
 				item.log.date = $scope.model.serverDate;
@@ -160,7 +162,6 @@ angular.module('myApp.controllers')
 				document.getElementById('evidenceImages').style.display = "none";
 				document.getElementById('evidence').src = "";
 				document.getElementById('evidenceSized').src = "";
-				console.log(document.getElementById('draw').children.length);
 				document.getElementById('draw').children[0].width = document.getElementById('draw').children[0].width;
 				document.getElementById("Wbox").value = "";
 				document.getElementById("Hbox").value = "";
@@ -277,7 +278,6 @@ angular.module('myApp.controllers').directive('drawing', function(){
       // The first canvas can be sized at the beginning
       canvasElement.width = document.getElementById("video-container").offsetWidth;
       canvasElement.height = document.getElementById("video-container").offsetHeight;
-      
 
       // Are we drawing?
       var drawing = false;
@@ -286,7 +286,7 @@ angular.module('myApp.controllers').directive('drawing', function(){
       var centerX;
       var centerY;
 
-      element.on('mousedown', function(event){ 
+      element.children()[0].addEventListener('mousedown', function(event){ 
         reset();
         startX = event.offsetX;
         startY = event.offsetY;
@@ -296,9 +296,9 @@ angular.module('myApp.controllers').directive('drawing', function(){
         ctx.beginPath();
         
         drawing = true;
-      });
+      },false);
 
-      element.on('mousemove', function(event){
+	  element.children()[0].addEventListener('mousemove', function(event){
         
         if(drawing){
         
@@ -325,7 +325,7 @@ angular.module('myApp.controllers').directive('drawing', function(){
           }
         }
         
-      });
+      },false);
 
       // canvas reset
       function reset(){
@@ -335,12 +335,12 @@ angular.module('myApp.controllers').directive('drawing', function(){
        canvasE.width = canvasE.width;
       }
 
-      element.on('mouseup', function(event){
+      element.children()[0].addEventListener('mouseup', function(event){
         // stop drawing
         drawing = false;
         //document.getElementById('evid').style.display = "";
         document.getElementById('evidenceImages').style.display = "inline-block";
-      });
+      },false);
       
       function draw(startX, startY,
                     currentX, currentY, rotate){
