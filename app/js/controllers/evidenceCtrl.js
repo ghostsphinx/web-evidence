@@ -1,9 +1,6 @@
 /**
  * Created by isc on 12/05/15.
  */
-
-
-
 angular.module('myApp.controllers')
 	.controller('EvidenceCtrl', ['$document', '$sce', '$scope', '$http',
 		'defaults', '$controller', 'Session', '$rootScope', 'camomileService',
@@ -31,13 +28,6 @@ angular.module('myApp.controllers')
 			$scope.model.q = {};
 
 			$scope.model.user_input = {};
-			//$scope.model.user_input.boundingBox = {};
-
-			/*$scope.model.resetTransparentPlan = function () {
-				var transparentPlan = d3.select("#transparent-plan");
-				transparentPlan.selectAll("svg").remove();
-				$scope.model.user_input.boundingBox = {};
-			};*/
 
 			$scope.model.updateIsDisplayedVideo = function (activate) {
 				$scope.model.isDisplayedVideo = activate;
@@ -45,7 +35,6 @@ angular.module('myApp.controllers')
 
 			// initialize page state
 			$scope.model.updateIsDisplayedVideo(false);
-			//$scope.model.updateTransparentPlan = false;
 
 			var _getVideo = function (id_medium, callback) {
 
@@ -80,7 +69,7 @@ angular.module('myApp.controllers')
 					//$scope.model.resetTransparentPlan();
 					$scope.model.updateIsDisplayedVideo(true);
 
-					if (item.source === "audio") {
+					if (item.modality === "audio") {
 						alert("Audio evidence");
 					}
 
@@ -107,20 +96,6 @@ angular.module('myApp.controllers')
 							$scope.model.clientDate = Date.now();
 
 							$scope.model.restrict_toggle = 2;
-							/*$scope.model.current_time_temp = $scope.model.q.start;
-							$scope.model.infbndsec = parseFloat($scope.model.q.start || 0);
-							if ($scope.model.infbndsec < 0) {
-								$scope.model.infbndsec = 0;
-							}
-							$scope.model.supbndsec = parseFloat($scope.model.q.end || 0);
-							if ($scope.model.supbndsec > $scope.model.fullDuration) {
-								$scope.model.supbndsec = $scope.model.fullDuration;
-							}
-							$scope.model.duration = $scope.model.supbndsec - $scope.model.infbndsec;
-
-							$scope.$apply(function () {
-								$scope.model.current_time = $scope.model.q.start;
-							});*/
 							$scope.model.current_time_temp = $scope.model.q.t;
 							$scope.model.infbndsec = parseFloat($scope.model.q.t || 0);
 							$scope.model.infbndsec-=5.0;
@@ -145,7 +120,7 @@ angular.module('myApp.controllers')
 			// Event launched when click on the save button.
 			$scope.model.saveQueueElement = function (isEvidence) {
 
-				if (isEvidence && document.getElementById('evidence').src === "") /*($scope.model.user_input.boundingBox.w === undefined || $scope.model.user_input.boundingBox.w === 0))kk*/ {
+				if (isEvidence && document.getElementById('evidence').src === "") {
 					alert("Please draw a bounding box around the face.");
 					return;
 				}
@@ -160,11 +135,9 @@ angular.module('myApp.controllers')
 				item.input = {};
 				item.input.id_submission = $scope.model.q.id_submission;
 				item.input.person_name = $scope.model.initialData;
-				item.input.source = $scope.model.q.source;
-				item.input.id_medium = $scope.model.q.id_medium;
+				item.input.modality = $scope.model.q.modality;
+				item.input.id_medium = $scope.model.q.medium_id;
 				item.input.id_shot = $scope.model.q.id_shot;
-				/*item.input.start = $scope.model.q.start;
-				item.input.end = $scope.model.q.end;*/
 				item.input.t = $scope.model.q.t;
 
 				var b_box = {};
@@ -178,11 +151,15 @@ angular.module('myApp.controllers')
 				if (isEvidence) {
 					item.output.person_name = $scope.model.user_input.person_name;
 					item.output.time = $scope.model.current_time;
-					item.output.image = document.getElementById('evidence').src;//$scope.model.user_input.boundingBox;
+					item.output.image = document.getElementById('evidence').src;
+					item.output.image_sized = document.getElementById('evidenceSized').src;
 					item.output.bounding_box = b_box;
 				}
+				console.log(item);
 
+				document.getElementById('evidenceImages').style.display = "none";
 				document.getElementById('evidence').src = "";
+				document.getElementById('evidenceSized').src = "";
 
 				camomileService.enqueue($scope.model.outgoingQueue, item, function (err, data) {
 
@@ -194,68 +171,6 @@ angular.module('myApp.controllers')
 
 				});
 			};
-
-			/*var liste = [];
-			var listeA = camomileService.getAnnotations();
-			var annot;
-			var i=0;
-			for (;i<listeA;i++){
-				annot = listeA[i];
-				if(annot.data.output.person_name != "") liste.push(annot.data.output.person_name);
-			}*/
-			/*$('#entry_input').autocomplete({
-				source : liste
-			});*/
-
-
-
-			/*var player = $("#player");
-			var transparentPlan = d3.select("#transparent-plan").style("width", "100%")
-				.style("height", (player.height()) + "px");
-
-			var originPosition;
-			transparentPlan.on("mouseup", function () {
-				originPosition = undefined;
-			});
-
-			var drag = d3.behavior.drag()
-				.origin(Object)
-				.on("drag", function () {
-
-					// mouse position
-					var mouse = d3.mouse(this);
-
-					originPosition = originPosition ? originPosition : mouse;
-					// Remove old element
-					transparentPlan.selectAll("svg").remove();
-
-					var size = Math.abs(mouse[0] - originPosition[0]);
-					var x = originPosition[0] - size;
-					var y = originPosition[1] - size;
-					var width = 2 * size;
-					var height = 2 * size;
-
-					transparentPlan.append("svg")
-						.style("width", "100%")
-						.style("height", "100%")
-						.append("rect")
-						.attr("x", x)
-						.attr("y", y)
-						.attr("width", width)
-						.attr("height", height)
-						.style("fill", "none")
-						.style("stroke", "red")
-						.style("stroke-width", 5);
-
-					// Store bounding box;
-					$scope.model.user_input.boundingBox.w = width / player.width();
-					$scope.model.user_input.boundingBox.h = height / player.height();
-					$scope.model.user_input.boundingBox.x = x / player.width();
-					$scope.model.user_input.boundingBox.y = y / player.height();
-
-				});
-
-			transparentPlan.call(drag);*/
 
 			$document.on(
 				"keydown",
@@ -381,21 +296,25 @@ angular.module('myApp.controllers').directive('drawing', function(){
         if(drawing){
         
         //document.getElementById('evid').style.display = "none";
-        document.getElementById('evidence').style.display = "none";
+        document.getElementById('evidenceImages').style.display = "none";
 
           // get current mouse position
           currentX = event.offsetX;
           currentY = event.offsetY;
 
-          // get the opposite corner position of the rectangle
-          oppositeX = 2*startX-currentX;
-          oppositeY = 2*startY-currentY;
+
+          if((startX<currentX && startY<currentY) || (startX>currentX && startY>currentY)){
+          	if(Math.abs(currentY-startY)<Math.abs(currentX-startX)) currentX = currentY-startY+startX;
+          	else currentY = currentX-startX+startY;
+          }
+          else{
+          	if(Math.abs(currentY-startY)<Math.abs(currentX-startX)) currentX = startY-currentY+startX;
+          	else currentY = startX-currentX+startY;
+    	  }
 
           // limit all the rectangle within the canvas and draw
-          if(oppositeX >= 0 && oppositeX <= 360*document.getElementById('player').videoWidth/document.getElementById('player').videoHeight && oppositeY >= 0 && oppositeY <= 360
-          		&& currentX >= 0 && currentX <= 360*document.getElementById('player').videoWidth/document.getElementById('player').videoHeight && currentY >= 0 && currentY <= 360){
+          if(currentX >= 0 && currentX <= 360*document.getElementById('player').videoWidth/document.getElementById('player').videoHeight && currentY >= 0 && currentY <= 360){
             draw(startX, startY, currentX, currentY);
-
           }
         }
         
@@ -406,26 +325,25 @@ angular.module('myApp.controllers').directive('drawing', function(){
       	// This simple operation reset the canvas
        canvasElement.width = canvasElement.width;
        canvasB.width = canvasB.width;
+       canvasE.width = canvasE.width;
       }
 
       element.bind('mouseup', function(event){
         // stop drawing
         drawing = false;
         //document.getElementById('evid').style.display = "";
-        document.getElementById('evidence').style.display = "";
+        document.getElementById('evidenceImages').style.display = "inline-block";
       });
       
-      function draw(centerX, centerY,
+      function draw(startX, startY,
                     currentX, currentY, rotate){
         
         reset();
-        var sizeX = 2 * (currentX - centerX);
-        var sizeY = 2 * (currentY - centerY);
-        var oppositeX = 2*startX-currentX;
-        var oppositeY = 2*startY-currentY;
+        var sizeX = currentX - startX;
+        var sizeY = currentY - startY;
        
-        ctx.rect(Math.min(oppositeX,currentX),
-                 Math.min(oppositeY,currentY),
+        ctx.rect(Math.min(startX,currentX),
+                 Math.min(startY,currentY),
                  Math.abs(sizeX), Math.abs(sizeY));
         ctx.lineWidth = 3;
         // color gradient
@@ -446,11 +364,11 @@ angular.module('myApp.controllers').directive('drawing', function(){
         // draw it
         ctx.stroke();
         // Launch the copy process
-        copy(Math.min(oppositeX,currentX),Math.min(oppositeY,currentY),Math.abs(currentX-oppositeX),Math.abs(currentY-oppositeY));
-        document.getElementById("Xbox").value = Math.min(oppositeX,currentX)/(360*document.getElementById('player').videoWidth/document.getElementById('player').videoHeight);
-        document.getElementById("Ybox").value = Math.min(oppositeY,currentY)/360;
-        document.getElementById("Wbox").value = Math.abs(currentX-oppositeX)/(360*document.getElementById('player').videoWidth/document.getElementById('player').videoHeight);
-        document.getElementById("Hbox").value = Math.abs(currentY-oppositeY)/360;
+        copy(Math.min(startX,currentX),Math.min(startY,currentY),Math.abs(sizeX),Math.abs(sizeY));
+        document.getElementById("Xbox").value = Math.min(startX,currentX)/(360*document.getElementById('player').videoWidth/document.getElementById('player').videoHeight);
+        document.getElementById("Ybox").value = Math.min(startY,currentY)/360;
+        document.getElementById("Wbox").value = Math.abs(sizeX)/(360*document.getElementById('player').videoWidth/document.getElementById('player').videoHeight);
+        document.getElementById("Hbox").value = Math.abs(sizeY)/360;
       }
 
       function copy(X, Y, sizeX, sizeY){
@@ -471,11 +389,13 @@ angular.module('myApp.controllers').directive('drawing', function(){
         canvasE.height = sizeY;
         // Copy from the second canvas to the third
         ctxe.putImageData(btmp,0,0);
+        //dataURI JPEG output
+        document.getElementById('evidence').src = canvasE.toDataURL("image/jpeg", 1.0);
         // Enlarge or reduce image with fixed dimensions
-        //canvasE.style.width = 100 + "px";
-    	//canvasE.style.height = 100 + "px";
+        canvasE.style.width = "110 px";
+    	canvasE.style.height = "110 px";
     	//dataURI JPEG output
-    	document.getElementById('evidence').src = canvasE.toDataURL("image/jpeg", 1.0);
+    	document.getElementById('evidenceSized').src = canvasE.toDataURL("image/jpeg", 1.0);
 
       }
 
