@@ -5,7 +5,6 @@
             </div>
             <div class="col-lg-8 col-md-12 col-xs-12">
                 <div id="video-container">
-                    
                     <video id="player" cm-video-player ng-src={{model.video}} height="360px" crossorigin="anonymous">
                     </video>
                     <drawing id="draw" rectangle-list='rectangles'></drawing>
@@ -29,10 +28,13 @@
             <canvas id="recup" style="position:relative; display:none;"></canvas>
             <span style="float: right" ng-show="model.isDisplayedVideo">
             <div id="evidence_button_id" style="margin-top: 30px;margin-left: -180px;" alt="">
-                <input id="confirm" class="image-button" type="image" src="../img/validate.png"  value="Evidence" ng-click="model.saveQueueElement(true)" width="90px" height="90px">
+                <input id="confirm" class="image-button" type="image" src="../img/validate.png"  value="Evidence" ng-click="model.saveQueueElement('yes')" width="90px" height="90px">
             </div>
             <div id="not_evidence_button_id" style="margin-top: 60px;margin-left: -180px;">
-                <input id="cancel" class="image-button" type="image" src="../img/un validate.png" value="Not Evidence" ng-click="model.saveQueueElement(false)" width="90px" height="90px">
+                <input id="cancel" class="image-button" type="image" src="../img/un validate.png" value="Not Evidence" ng-click="model.saveQueueElement('no')" width="90px" height="90px">
+            </div>
+            <div id="not_name_button_id" style="margin-top: 60px;margin-left: -180px;">
+                <input id="notName" class="image-button" type="image" src="../img/Nan.png" value="Not A Name" ng-click="model.saveQueueElement('ko')" width="90px" height="90px">
             </div>
             </span>
         </div>

@@ -120,7 +120,7 @@ angular.module('myApp.controllers')
 			// Event launched when click on the save button.
 			$scope.model.saveQueueElement = function (isEvidence) {
 
-				if (isEvidence && document.getElementById('evidence').src === "") {
+				if (isEvidence == "" && document.getElementById('evidence').src === "") {
 					alert("Please draw a bounding box around the face.");
 					return;
 				}
@@ -148,11 +148,8 @@ angular.module('myApp.controllers')
 				b_box.y = parseFloat(document.getElementById("Ybox").value);
 
 				item.output = {};
-				if(isEvidence) item.output.status = 'yes';
-				else{
-					item.output.status = 'no';
-				}
-				if (isEvidence) {
+				item.output.status = isEvidence;
+				if (isEvidence == "yes") {
 					item.output.person_name = $scope.model.user_input.person_name;
 					item.output.t = $scope.model.current_time;
 					item.output.image = document.getElementById('evidence').src;
