@@ -69,7 +69,7 @@ angular.module('myApp.controllers')
 					//$scope.model.resetTransparentPlan();
 					$scope.model.updateIsDisplayedVideo(true);
 
-					if (item.modality === "pronunced") {
+					if (item.modality === "pronounced") {
 						alert("Audio evidence");
 					}
 
