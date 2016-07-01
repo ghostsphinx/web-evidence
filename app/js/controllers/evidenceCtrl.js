@@ -70,7 +70,7 @@ angular.module('myApp.controllers')
 					$scope.model.updateIsDisplayedVideo(true);
 
 					if (item.modality === "pronounced") {
-						document.getElementById("message").innerHTML = "WARNING: The evidence is pronounced !";
+						document.getElementById("message").innerHTML = "WARNING: The person name might be pronounced !";
 					}
 
 					$scope.model.q = item;
@@ -121,18 +121,18 @@ angular.module('myApp.controllers')
 			$scope.model.saveQueueElement = function (isEvidence) {
 
 				if (isEvidence == "" && document.getElementById('evidence').src === "") {
-					alert("Please draw a bounding box around the face.");
-					return;
+					document.getElementById("message").innerHTML = "Please draw a bounding box around the face.";
 				}
 
 				var item = {};
-
-				//camomileService.me();
 
 				item.log = {};
 				item.log.user = Session.username;
 				item.log.date = $scope.model.serverDate;
 				item.log.duration = Date.now() - $scope.model.clientDate;
+				/*camomileService.me(function(callback){
+					item.log.user_id = _id;
+				});*/
 
 				item.input = {};
 				item.input.corpus_id = $scope.model.q.corpus_id;
