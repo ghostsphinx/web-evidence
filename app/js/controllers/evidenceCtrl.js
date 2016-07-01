@@ -70,7 +70,7 @@ angular.module('myApp.controllers')
 					$scope.model.updateIsDisplayedVideo(true);
 
 					if (item.modality === "pronounced") {
-						alert("Audio evidence");
+						document.getElementById("message").innerHTML = "WARNING: The evidence is pronounced !";
 					}
 
 					$scope.model.q = item;
