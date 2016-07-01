@@ -163,6 +163,7 @@ angular.module('myApp.controllers')
 				document.getElementById("Hbox").value = "";
 				document.getElementById("Xbox").value = "";
 				document.getElementById("Ybox").value = "";
+				document.getElementById("message").innerHTML = "";
 
 				camomileService.enqueue($scope.model.outgoingQueue, item, function (err, data) {
 
