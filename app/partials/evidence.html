@@ -1,4 +1,47 @@
+<script type="text/javascript">
+    function streamTest(){
+        var path="";
+        if (!document.getElementById('default').checked) path = document.getElementById("localServerInput").value+"/3-24/0121200000DVBT6x1.mp4";
+        var html = '<video id="playertest" src='+path+' height="80px" crossorigin="anonymous"></video>';
+        document.getElementById('videoTest').innerHTML = html;
+        document.getElementById('playertest').play();
+    }
+    function eraseTest(){
+        document.getElementById('videoTest').innerHTML = "";
+    }
+
+</script>
+
 <div ng-controller="EvidenceCtrl" ng-show='isLogged()' ng-init="model.popQueueElement()">
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Stream server settings</h4>
+                </div>
+                <div class="modal-body">
+                    In this window, you will be able to define how you will stream the videos tha will be annotated.
+                    </br></br>
+                    Use default path:
+                    <input type="checkbox" id="default" class="form-control" ng-model="model.useDefaultVideoPath" style="width:34px;"> </br>
+                    <div ng-hide="model.useDefaultVideoPath">
+                        Define new path:
+                        <input id="localServerInput" type="text" class="form-control" ng-model="model.videoPath">
+                        </br>
+                        <span>
+                            <button type="button" class="btn btn-default" style="float:left;" onclick="streamTest()">Test</button>
+                            <div id="videoTest" style="float:left;"></div>
+                        </span> 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="eraseTest()" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="row top-padding">
             <div class="col-lg-2 col-md-pull-0 col-xs-pull-0">
