@@ -69,7 +69,7 @@ angular.module('myApp.controllers')
 					//$scope.model.resetTransparentPlan();
 					$scope.model.updateIsDisplayedVideo(true);
 
-					if (item.modality === "audio") {
+					if (item.modality === "pronunced") {
 						alert("Audio evidence");
 					}
 
@@ -161,7 +161,6 @@ angular.module('myApp.controllers')
 
 				document.getElementById('evidenceImages').style.display = "none";
 				document.getElementById('evidence').src = "";
-				document.getElementById('evidenceSized').src = "";
 				document.getElementById('draw').children[0].width = document.getElementById('draw').children[0].width;
 				document.getElementById("Wbox").value = "";
 				document.getElementById("Hbox").value = "";
