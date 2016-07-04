@@ -47,6 +47,7 @@ angular.module('myApp.controllers')
 			// rename from "initQueueData" to "popQueueElement"
 			$scope.model.popQueueElement = function () {
 
+				document.getElementById('videoTest').innerHTML = "";
 				// Get queue first element and pop it from the queue
 				camomileService.dequeue($scope.model.incomingQueue, function (err, item) {
 

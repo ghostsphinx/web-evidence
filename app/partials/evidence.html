@@ -17,11 +17,11 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content" style ="height:400px;">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" onclick="eraseTest()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Stream server settings</h4>
                 </div>
                 <div class="modal-body">
-                    In this window, you will be able to define how you will stream the videos that will be annotated. Do not forget to stop the test and click close to call the first annotation.
+                    In this window, you will be able to define how you will stream the videos that will be annotated. Do not forget to click to call the first annotation if you are beginning.
                     </br></br>
                     Define new path:
                     <div ng-controller="ParameterButtonCtrl">
@@ -31,12 +31,12 @@
                         </div>
                     </br>
                     <button type="button" class="btn btn-default" style="float:left;" onclick="streamTest()">Test</button>
-                    <button type="button" class="btn btn-default" style="float:left;" onclick="eraseTest()">Stop</button>
+                    <button type="button" class="btn btn-default" style="float:left;" onclick="eraseTest()">Stop test</button> 
                     <div id="videoTest" style="float:left;"></div>
                 </div>
                 </br></br></br></br>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="model.popQueueElement()" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="model.popQueueElement()" data-dismiss="modal">Call the first</button>
                 </div>
             </div>
         </div>
