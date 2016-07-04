@@ -38,13 +38,9 @@ angular.module('myApp.controllers')
 
 			var _getVideo = function (id_medium, callback) {
 
-				if ($scope.model.useDefaultVideoPath) {
-					callback(null, $sce.trustAsResourceUrl(camomileService.getMediumURL(id_medium, 'webm')));
-				} else {
-					camomileService.getMedium(id_medium, function (err, medium) {
-						callback(err, $sce.trustAsResourceUrl($scope.model.videoPath + '/' + medium.url + '.mp4'));
-					});
-				}
+				camomileService.getMedium(id_medium, function (err, medium) {
+					callback(err, $sce.trustAsResourceUrl($scope.model.videoPath + '/' + medium.url + '.mp4'));
+				});
 			};
 
 			// Initializes the data from the queue
