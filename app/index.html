@@ -113,13 +113,9 @@
                             <button type="submit" class="btn btn-danger">Logout</button>
                         </form>
 
-                        <div ng-controller="ParameterButtonCtrl">
-                            <form ng-submit="saveVideoPreferences()" class="navbar-form navbar-left">
-                                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#streamModal">
                                     Stream server settings
-                                </button>
-                            </form>
-                        </div>
+                        </button>
                     </div>
 
                     <div ng-if="!isLogged()">
