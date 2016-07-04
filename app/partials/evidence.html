@@ -7,7 +7,6 @@
     }
     function eraseTest(){
         document.getElementById('videoTest').innerHTML = "";
-        document.getElementById('vidPath').value = document.getElementById('localServerInput').value;
     }
 
 </script>
@@ -25,7 +24,6 @@
                     In this window, you will be able to define how you will stream the videos that will be annotated. Do not forget to stop the test and click close to call the first annotation.
                     </br></br>
                     Define new path:
-                    <input id="vidPath" type="text" class="form-control" ng-model="model.videoPath" style="display:none;">
                     <div ng-controller="ParameterButtonCtrl">
                             <form id="save" ng-submit="saveVideoPreferences()">
                                 <input id="localServerInput" type="text" class="form-control" ng-model="model.videoPath">
