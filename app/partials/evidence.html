@@ -1,20 +1,20 @@
 <script type="text/javascript">
     function streamTest(){
-        var path="";
-        if (!document.getElementById('default').checked) path = document.getElementById("localServerInput").value+"/3-24/0121200000DVBT6x1.mp4";
+        var path = document.getElementById("localServerInput").value+"/3-24/0121200000DVBT6x1.mp4";
         var html = '<video id="playertest" src='+path+' height="80px" crossorigin="anonymous"></video>';
         document.getElementById('videoTest').innerHTML = html;
         document.getElementById('playertest').play();
     }
     function eraseTest(){
         document.getElementById('videoTest').innerHTML = "";
+        document.getElementById('vidPath').value = document.getElementById('localServerInput').value;
     }
 
 </script>
 
-<div ng-controller="EvidenceCtrl" ng-show='isLogged()' ng-init="model.popQueueElement()">
+<div ng-controller="EvidenceCtrl" ng-show='isLogged()'>
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="streamModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -22,22 +22,22 @@
                     <h4 class="modal-title" id="myModalLabel">Stream server settings</h4>
                 </div>
                 <div class="modal-body">
-                    In this window, you will be able to define how you will stream the videos tha will be annotated.
+                    In this window, you will be able to define how you will stream the videos that will be annotated. Do not forget to stop the test and click close to call the first annotation.
                     </br></br>
-                    Use default path:
-                    <input type="checkbox" id="default" class="form-control" ng-model="model.useDefaultVideoPath" style="width:34px;"> </br>
-                    <div ng-hide="model.useDefaultVideoPath">
-                        Define new path:
-                        <input id="localServerInput" type="text" class="form-control" ng-model="model.videoPath">
-                        </br>
-                        <span>
-                            <button type="button" class="btn btn-default" style="float:left;" onclick="streamTest()">Test</button>
-                            <div id="videoTest" style="float:left;"></div>
-                        </span> 
-                    </div>
+                    Define new path:
+                    <input id="vidPath" type="text" class="form-control" ng-model="model.videoPath" style="display:none;">
+                    <div ng-controller="ParameterButtonCtrl">
+                            <form id="save" ng-submit="saveVideoPreferences()">
+                                <input id="localServerInput" type="text" class="form-control" ng-model="model.videoPath">
+                            </form>
+                        </div>
+                    </br>
+                    <button type="button" class="btn btn-default" style="float:left;" onclick="streamTest()">Test</button>
+                    <button type="button" class="btn btn-default" style="float:left;" onclick="eraseTest()">Stop</button>
+                    <div id="videoTest" style="float:left;"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="eraseTest()" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="model.popQueueElement()" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
