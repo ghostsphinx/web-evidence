@@ -41,6 +41,29 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="tutoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Evidence Annotation Tutorial</h4>
+                </div>
+                <div class="modal-body">
+                    Here, you will learn how to use this interface.
+                    </br></br>
+                    After you set the path to the streaming server (see Stream server settings), the first video will be loaded in the interface.</br>
+                    You can play the video 5 seconds back or 5 seconds forward in order to find the best view of the person.</br>
+                    With the green icon, you have to draw a box within the video in order to circle an entire face, verify if the name and the evidence (the preview image) are correct, and click on the green icon.</br>
+                    With the red icon, you set that the annotation is wrong.</br>
+                    With the blue icon ("not a name"), you set that the name that was found is wrong, therefore there is maybe no annotation to do.</br>
+                    With the black icon ("?") means that you don't know.</br>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="row top-padding">
             <div class="col-lg-2 col-md-pull-0 col-xs-pull-0">
@@ -69,16 +92,33 @@
                 </div>
             </div>
             <canvas id="recup" style="position:relative; display:none;"></canvas>
-            <span style="float: right" ng-show="model.isDisplayedVideo">
-            <div id="evidence_button_id" style="margin-top: 30px;margin-left: -180px;" alt="">
-                <input id="confirm" class="image-button" type="image" src="../img/validate.png"  value="Evidence" ng-click="model.saveQueueElement('yes')" width="90px" height="90px">
-            </div>
-            <div id="not_evidence_button_id" style="margin-top: 60px;margin-left: -180px;">
-                <input id="cancel" class="image-button" type="image" src="../img/un validate.png" value="Not Evidence" ng-click="model.saveQueueElement('no')" width="90px" height="90px">
-            </div>
-            <div id="not_name_button_id" style="margin-top: 60px;margin-left: -180px;">
-                <input id="notName" class="image-button" type="image" src="../img/Nan.png" value="Not A Name" ng-click="model.saveQueueElement('ko')" width="90px" height="90px">
-            </div>
+            <span  ng-show="model.isDisplayedVideo">
+            <table style="width:250px;">
+            <tr>
+                <td>
+                <div id="evidence_button_id" style="margin-top: 30px;" alt="">
+                    <input id="confirm" class="image-button" type="image" src="../img/validate.png"  value="Evidence" ng-click="model.saveQueueElement('yes')" width="90px" height="90px">
+                </div>
+                </td>
+                <td style="margin-left:20px;">
+                <div id="not_evidence_button_id" style="margin-top: 60px;">
+                    <input id="cancel" class="image-button" type="image" src="../img/un validate.png" value="Not Evidence" ng-click="model.saveQueueElement('no')" width="90px" height="90px">
+                </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <div id="not_name_button_id" style="margin-top: 60px;">
+                    <input id="notName" class="image-button" type="image" src="../img/Nan.png" value="Not A Name" ng-click="model.saveQueueElement('ko')" width="90px" height="90px">
+                </div>
+                </td>
+                <td style="margin-left:20px;">
+                <div id="not_know_button_id" style="margin-top: 60px;">
+                    <input id="notKnown" class="image-button" type="image" src="../img/jonsnow.jpg" value="Not Known" ng-click="model.saveQueueElement('nk')" width="90px" height="90px">
+                </div>
+                </td>
+            </tr>
+            </table>
             </span>
         </div>
     </div>
