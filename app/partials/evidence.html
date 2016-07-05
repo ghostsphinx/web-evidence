@@ -1,9 +1,10 @@
 <script type="text/javascript">
     function streamTest(){
         var path = document.getElementById("localServerInput").value+"/3-24/0121200000DVBT6x1.mp4";
-        var html = '<video id="playertest" src='+path+' height="80px" crossorigin="anonymous"></video>';
+        var html = '<video id="playertest" src='+path+' height="80px" style="margin-top:-40px; margin-left:15px;" crossorigin="anonymous"></video>';
         document.getElementById('videoTest').innerHTML = html;
-        document.getElementById('playertest').play();
+        document.getElementById('playertest').currentTime = 12*60+56;
+        document.getElementById('playertest').pause();
     }
     function eraseTest(){
         document.getElementById('videoTest').innerHTML = "";
@@ -15,13 +16,13 @@
     <!-- Modal -->
     <div class="modal fade" id="streamModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style ="height:400px;">
+            <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" onclick="eraseTest()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Stream server settings</h4>
                 </div>
                 <div class="modal-body">
-                    In this window, you will be able to define how you will stream the videos that will be annotated. Do not forget to click to call the first annotation if you are beginning.
+                    In this window, you will be able to define how you will stream the videos that will be annotated. Do not forget to click to call the first annotation if you are beginning. When you click to test your server, if the two images are alike, it is working properly.
                     </br></br>
                     Define new path:
                     <div ng-controller="ParameterButtonCtrl">
@@ -30,11 +31,20 @@
                             </form>
                         </div>
                     </br>
-                    <button type="button" class="btn btn-default" style="float:left;" onclick="streamTest()">Test</button>
-                    <button type="button" class="btn btn-default" style="float:left;" onclick="eraseTest()">Stop test</button> 
-                    <div id="videoTest" style="float:left;"></div>
+                    <table>
+                    <tr>
+                        <td>
+                        <button type="button" class="btn btn-default" onclick="streamTest()">Test</button>
+                        </td>
+                        <td>
+                            <img src="../img/1256.png" style="height:80px; margin-left:15px;">
+                        </td>
+                        <td>
+                            <div id="videoTest"></div>
+                        </td>   
+                    </tr>
+                    </table>
                 </div>
-                </br></br></br></br>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" ng-click="model.popQueueElement()" data-dismiss="modal">Call the first</button>
                 </div>
