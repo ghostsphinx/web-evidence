@@ -11,20 +11,8 @@ angular.module('myApp.controllers')
 
             $scope.model = {};
             $scope.model.absUrl = $rootScope.absUrl;
-
-            var useDefaultVideoPath = Cookies.get("use.default.video.path");
-            // Test the string value also, cause Cookie store a string, not a boolean
-            if (useDefaultVideoPath === undefined || useDefaultVideoPath === 'true' || useDefaultVideoPath == true)
-            {
-                useDefaultVideoPath = true;
-            }
-            else
-            {
-                useDefaultVideoPath = false;
-            }
             var videoPath = Cookies.get("video.path") || "";
 
-            $scope.model.useDefaultVideoPath = useDefaultVideoPath;
             $scope.model.videoPath = videoPath;
 
             var config = $resource($rootScope.absUrl + '/config');
@@ -32,7 +20,6 @@ angular.module('myApp.controllers')
             // Use callbacks to store in $rootScope
             config.get().$promise.then(function (data) {
                 $rootScope.dataroot = data.camomile_api;
-                $rootScope.toolroot = data.pyannote_api;
                 $rootScope.queues = data.queues;
 
                 camomileService.setURL($rootScope.dataroot);
