@@ -117,7 +117,7 @@ angular.module('myApp.controllers')
 			// Event launched when click on the save button.
 			$scope.model.saveQueueElement = function (isEvidence) {
 
-				if (isEvidence == "" && document.getElementById('evidence').src === "") {
+				if (document.getElementById('evidence').src === "") {
 					document.getElementById("message").innerHTML = "Please draw a bounding box around the face.";
 				}
 
