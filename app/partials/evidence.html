@@ -26,10 +26,10 @@
                     </br></br></br>
                     Define new path:
                     <div ng-controller="ParameterButtonCtrl">
-                            <form id="save" ng-submit="saveVideoPreferences()">
-                                <input id="localServerInput" type="text" class="form-control" ng-model="model.videoPath">
-                            </form>
-                        </div>
+                        <form id="save" ng-submit="saveVideoPreferences()">
+                            <input id="localServerInput" type="text" class="form-control" ng-model="model.videoPath">
+                        </form>
+                    </div>
                     </br>
                     <table>
                     <tr>
@@ -76,87 +76,88 @@
     </div>
     <div class="container-fluid">
         <div class="row top-padding">
-            <div class="col-lg-2 col-md-pull-0 col-xs-pull-0">
-            </div>
-            <div class="col-lg-8 col-md-12 col-xs-12" style="width:670px;">
-                <label id="message" style="color:red; top:-10px;"></label>
-                <div id="video-container">
-                    <video id="player" cm-video-player ng-src={{model.video}} height="360px" crossorigin="anonymous">
-                    </video>
-                    <drawing id="draw" rectangle-list='rectangles'></drawing>
-                    <div class="controls">
-                        <div id="play-button">
-                            <button type="button" class="video-control" id="play-pause" ng-click="model.toggle_play()">
-                                {{ model.play_label }}
-                            </button>
+            <div class="col-md-8 col-xs-12">
+                <div class="row">
+                    <label id="message" style="color:red;"></label>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-xs-8">
+                        <div class="input-group">
+                            <span class="input-group-addon" data-title="Enter your own annotation here"><b>Element:</b></span>
+                            <form ng-submit="model.addEntry()" class="ng-pristine ng-valid">
+                                <input id="entry_input" name="entry_input" type="text" style="font-size:25px;height:50px;" class="form-control ng-pristine ng-valid" ng-model="model.user_input.person_name">
+                            </form>
                         </div>
-                        <div id="control-bar" title="Drag to reference frame">
-                            <div id="controlsoverlay">
-                                <input width="100%" type="range" id="seek-bar" min="{{ model.infbndsec }}" max="{{ model.supbndsec }}" step="{{ (model.supbndsec - model.infbndsec) / 400 }}" ng-model="model.current_time">
+                    </div>
+                    <div class="col-md-3 col-xs-3">
+                        <div id="not_name_button_id">
+                            <input id="notName" class="image-button" type="image" src="../img/Nan.png" value="Not A Name" ng-click="model.saveQueueElement('ko')" width="90px" height="90px">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <div id="video-container">
+                            <video id="player" cm-video-player ng-src={{model.video}} height="360px" crossorigin="anonymous"></video>
+                            <drawing id="draw" rectangle-list='rectangles'></drawing>
+                            <div class="controls">
+                                <div id="play-button">
+                                    <button type="button" class="video-control" id="play-pause" ng-click="model.toggle_play()">
+                                    {{ model.play_label }}
+                                    </button>
+                                </div>
+                                <div id="control-bar" title="Drag to reference frame">
+                                    <div id="controlsoverlay">
+                                        <input width="100%" type="range" id="seek-bar" min="{{ model.infbndsec }}" max="{{ model.supbndsec }}" step="{{ (model.supbndsec - model.infbndsec) / 400 }}" ng-model="model.current_time">
+                                    </div>
+                                </div>
+                                <div id="time-display">
+                                    <label>{{ model.current_time_display }}</label>
+                                </div>
                             </div>
                         </div>
-                        <div id="time-display">
-                            <label>{{ model.current_time_display }}</label>
+                    </div>
+                </div>
+                <div class="row" ng-show="model.isDisplayedVideo">
+                    <div class="col-md-6 col-xs-6">
+                        <div id="not_evidence_button_id">
+                            <input id="cancel" class="image-button" type="image" src="../img/un validate.png" value="Not Evidence" ng-click="model.saveQueueElement('no')" width="90px" height="90px">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-6">
+                        <div id="not_know_button_id">
+                            <input id="notKnown" class="image-button" type="image" src="../img/jonsnow.jpg" value="Not Known" ng-click="model.saveQueueElement('nk')" width="90px" height="90px">
                         </div>
                     </div>
                 </div>
             </div>
-            <canvas id="recup" style="position:relative; display:none;"></canvas>
-            <span  ng-show="model.isDisplayedVideo">
-            <table style="width:250px;">
-            <tr>
-                <td>
-                <div id="evidence_button_id" style="margin-top: 30px;" alt="">
-                    <input id="confirm" class="image-button" type="image" src="../img/validate.png"  value="Evidence" ng-click="model.saveQueueElement('yes')" width="90px" height="90px">
+            <div class="col-md-4 col-xs-12">
+                <div class="row" ng-show="model.isDisplayedVideo">
+                    <div class="col-md-12 col-xs-12">
+                        <canvas id="recup" style="position:relative; display:none;"></canvas>
+                        Evidence image preview:
+                    </div>
                 </div>
-                </td>
-                <td style="margin-left:20px;">
-                <div id="not_evidence_button_id" style="margin-top: 60px;">
-                    <input id="cancel" class="image-button" type="image" src="../img/un validate.png" value="Not Evidence" ng-click="model.saveQueueElement('no')" width="90px" height="90px">
+                <div class="row" ng-show="model.isDisplayedVideo">
+                    <div class="col-md-12 col-xs-12">
+                        <canvas id="evid" style="position:relative; display:none;"></canvas>
+                        <div id="evidenceImages" style="display:none;">
+                            <img id="evidence"/>
+                        </div>
+                    </div>
                 </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                <div id="not_name_button_id" style="margin-top: 60px;">
-                    <input id="notName" class="image-button" type="image" src="../img/Nan.png" value="Not A Name" ng-click="model.saveQueueElement('ko')" width="90px" height="90px">
+                <div class="row" ng-show="model.isDisplayedVideo">
+                    <div class="col-md-6 col-xs-6">
+                        <div id="evidence_button_id">
+                            <input id="confirm" class="image-button" type="image" src="../img/validate.png"  value="Evidence" ng-click="model.saveQueueElement('yes')" width="90px" height="90px">
+                        </div>
+                    </div>
                 </div>
-                </td>
-                <td style="margin-left:20px;">
-                <div id="not_know_button_id" style="margin-top: 60px;">
-                    <input id="notKnown" class="image-button" type="image" src="../img/jonsnow.jpg" value="Not Known" ng-click="model.saveQueueElement('nk')" width="90px" height="90px">
-                </div>
-                </td>
-            </tr>
-            </table>
-            </span>
-        </div>
-    </div>
-    <div class="container-fluid" ng-show="model.isDisplayedVideo" style="margin-top: 30px;margin-left: 85px;">
-        <div class="col-lg-1 col-md-pull-0 col-xs-pull-0">
-        </div>
-        <div class="col-lg-8 col-md-12 col-xs-12">
-            <div class="input-group">
-                <span class="input-group-addon" data-title="Enter your own annotation here"><b>Element:</b></span>
-                <form ng-submit="model.addEntry()" class="ng-pristine ng-valid">
-                    <input id="entry_input" name="entry_input" type="text" style="font-size:25px;height:50px;" class="form-control ng-pristine ng-valid" ng-model="model.user_input.person_name">
-                </form>
+                <input id="Xbox" style="display:none;">
+                <input id="Ybox" style="display:none;">
+                <input id="Wbox" style="display:none;">
+                <input id="Hbox" style="display:none;">
             </div>
         </div>
     </div>
-    <canvas id="evid" style="position:relative; display:none;"></canvas>
-    </br>
-    <div id="evidenceImages" style="display:none;">
-        Evidence image preview:
-        </br>
-        <img id="evidence"/>
-    </div>
-    </br>
-    <input id="Xbox" style="display:none;">
-    </br>
-    <input id="Ybox" style="display:none;">
-    </br>
-    <input id="Wbox" style="display:none;">
-    </br>
-    <input id="Hbox" style="display:none;">
 </div>
