@@ -335,6 +335,7 @@ angular.module('myApp.controllers').directive('drawing', function(){
         drawing = false;
         //document.getElementById('evid').style.display = "";
         document.getElementById('evidenceImages').style.display = "inline-block";
+        document.getElementById('confirm').disabled="";
       },false);
       
       function draw(startX, startY,
