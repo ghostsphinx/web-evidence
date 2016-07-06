@@ -195,9 +195,6 @@ angular.module('myApp.controllers')
 						if (button_checked) {
 							event.target.blur();
 						}
-						$scope.$apply(function () {
-							$scope.model.saveQueueElement(true);
-						});
 					}
 					//space
 					if (event.keyCode == 32 && targetID != "entry_input") {
