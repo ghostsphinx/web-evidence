@@ -55,11 +55,9 @@ function streamTest(){
         document.getElementById('playertest3').currentTime = 70;
         document.getElementById('playertest3').pause();
     }
-    function eraseTest(){
+function eraseTest(){
         document.getElementById('videoTest1').innerHTML = "";
         document.getElementById('videoTest2').innerHTML = "";
         document.getElementById('videoTest3').innerHTML = "";
-    }
-    function updateLabel(){
-        document.getElementById('label_name').innerHTML = document.getElementById('entry_input').value;
-    }
+}
+    
