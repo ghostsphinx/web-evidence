@@ -22,6 +22,10 @@ angular.module('myApp.controllers')
 				Session: Session
 			});
 
+			$scope.model.updateLabel = function(){
+        		document.getElementById('label_name').innerHTML = document.getElementById('entry_input').value;
+    		};
+
 			$scope.model.incomingQueue = $rootScope.queues.evidenceIn;
 			$scope.model.outgoingQueue = $rootScope.queues.evidenceOut;
 

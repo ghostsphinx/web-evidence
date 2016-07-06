@@ -86,7 +86,7 @@
                     <div class="col-md-10 col-xs-12">
                         <div class="input-group">
                             <form ng-submit="model.addEntry()" class="ng-pristine ng-valid">
-                                <input id="entry_input" name="entry_input" type="text" style="font-size:25px;height:50px;" class="form-control ng-pristine ng-valid" ng-model="model.user_input.person_name" onchange="updateLabel()">
+                                <input id="entry_input" name="entry_input" type="text" style="font-size:25px;height:50px;" class="form-control ng-pristine ng-valid" ng-model="model.user_input.person_name" ng-change="model.updateLabel()">
                             </form>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-danger" style="height:50px;" ng-click="model.saveQueueElement('ko')">This is not a name</button>
