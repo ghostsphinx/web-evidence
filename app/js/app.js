@@ -60,4 +60,3 @@ function eraseTest(){
         document.getElementById('videoTest2').innerHTML = "";
         document.getElementById('videoTest3').innerHTML = "";
 }
-    
