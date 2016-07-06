@@ -26,10 +26,26 @@
                             <img src="../img/1256.png" style="height:80px; margin-left:15px;">
                         </td>
                         <td>
-                            <div id="videoTest"></div>
-                        </td>   
+                            <img src="../img/028.png" style="height:80px; margin-left:15px;">
+                        </td>
+                        <td>
+                            <img src="../img/0110.png" style="height:80px; margin-left:15px;">
+                        </td> 
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div id="videoTest1" style="margin-top:50px;"></div>
+                        </td>
+                        <td>
+                            <div id="videoTest2" style="margin-top:50px;"></div>
+                        </td>
+                        <td>
+                            <div id="videoTest3" style="margin-top:50px;"></div>
+                        </td>  
                     </tr>
                     </table>
+                    <label style="position:relative; height:40px;"></label>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" ng-click="model.popQueueElement()" data-dismiss="modal">Call the first</button>
@@ -73,7 +89,7 @@
                                 <input id="entry_input" name="entry_input" type="text" style="font-size:25px;height:50px;" class="form-control ng-pristine ng-valid" ng-model="model.user_input.person_name" onchange="updateLabel()">
                             </form>
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-danger" style="height:50px;">This is not a name</button>
+                                <button type="button" class="btn btn-danger" style="height:50px;" ng-click="model.saveQueueElement('ko')">This is not a name</button>
                             </span>
                         </div>
                     </div>
@@ -107,32 +123,37 @@
                         <div id="not_evidence_button_id">
                             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-danger btn-lg">Wrong annotation</button>
+                                    <button type="button" class="btn btn-danger btn-lg" ng-click="model.saveQueueElement('no')">Wrong annotation</button>
                                 </div>
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-default btn-lg">I don't know</button>
+                                    <button type="button" class="btn btn-default btn-lg" ng-click="model.saveQueueElement('nk')">I don't know</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-xs-12">
+            <div class="col-md-4 col-xs-12" style="margin-top:43px;">
                 <div class="row" ng-show="model.isDisplayedVideo">
                     <div class="col-md-12 col-xs-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <label id="label_name" ononline="updateLabel()"></label>
+                                <label id="label_name"></label>
                             </div>
                             <div class="panel-body">
                                 <canvas id="recup" style="position:relative; display:none;"></canvas>
                                 <canvas id="evid" style="position:relative; display:none;"></canvas>
-                                <div id="evidenceImages" style="display:none;">
-                                    <img id="evidence"/>
+                                <div id="evidenceImages" style="float:left; display:none; width:100%">
+                                    <img id="evidence" class="img-responsive" width="100%"/>
                                 </div>
+                                <label style="position:relative; height:360px;"></label>
                             </div>
-                            <div class="panel-footer" >
-                                <button type="button" id="confirm" class="btn btn-success btn-lg" disabled="disabled" style="margin:auto;">Validation</button>
+                            <div class="panel-footer">
+                                <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" id="confirm" class="btn btn-success btn-lg" disabled="disabled" ng-click="model.saveQueueElement('yes')" style="margin:auto;">Validation</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
