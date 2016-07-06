@@ -22,8 +22,25 @@ angular.module('myApp.controllers')
 				Session: Session
 			});
 
-			$scope.model.updateLabel = function(){
+			function invalidInput(){
+    			var re = /^[a-z_]+$/;
+    			if(!re.test(document.getElementById('entry_input').value)) document.getElementById('message').innerHTML = "The name can only contains letter from a to z and _";
+    			else document.getElementById('message').innerHTML = "";
+    		}
+
+    		$scope.model.updateValidInput = function(){
+    			invalidInput();
+    			var re = /^[a-z_]+$/;
+        		if(!re.test(document.getElementById('entry_input').value) || document.getElementById("Wbox").value == "") document.getElementById('confirm').disabled = "disabled";
+				else document.getElementById('confirm').disabled = "";
+    		}
+
+    		$scope.model.updateLabel = function(){
         		document.getElementById('label_name').innerHTML = document.getElementById('entry_input').value;
+        		var re = /^[a-z_]+$/;
+        		invalidInput();
+        		if(!re.test(document.getElementById('entry_input').value) || document.getElementById("Wbox").value == "") document.getElementById('confirm').disabled = "disabled";
+				else document.getElementById('confirm').disabled = "";
     		};
 
 			$scope.model.incomingQueue = $rootScope.queues.evidenceIn;
@@ -161,8 +178,7 @@ angular.module('myApp.controllers')
 					item.output.bounding_box = b_box;
 				}
 
-				document.getElementById('evidenceImages').style.display = "none";
-				document.getElementById('evidence').src = "";
+				document.getElementById('evidence').src = "../img/default.jpg";
 				document.getElementById('draw').children[0].width = document.getElementById('draw').children[0].width;
 				document.getElementById("Wbox").value = "";
 				document.getElementById("Hbox").value = "";
@@ -195,6 +211,9 @@ angular.module('myApp.controllers')
 						if (button_checked) {
 							event.target.blur();
 						}
+						$scope.$apply(function () {
+							if (!document.getElementById('confirm').disabled) $scope.model.saveQueueElement("yes");
+						});
 					}
 					//space
 					if (event.keyCode == 32 && targetID != "entry_input") {
@@ -209,7 +228,7 @@ angular.module('myApp.controllers')
 					if (event.keyCode == 27) {
 						$scope.$apply(function () {
 							//skip
-							$scope.model.saveQueueElement(false);
+							//$scope.model.saveQueueElement(false);
 						});
 					}
 					//Left

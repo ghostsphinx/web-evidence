@@ -118,7 +118,7 @@ Starting up http-server, serving __ROOTDIR__ on: http://0.0.0.0:8080</pre>
                 </br>
                 <div class="row">
                     <div class="col-md-12 col-xs-12">
-                        <div id="video-container" data-toggle="popover" title="Step 5" data-placement="left" data-content="If the annotation is right, draw a box around the face on the video" data-trigger="manual">
+                        <div id="video-container" data-toggle="popover" title="Step 5" data-placement="left" data-content="If the annotation is right, draw a box around the face on the video" data-trigger="manual" ng-mouseup="model.updateValidInput()">
                             <video id="player" cm-video-player ng-src={{model.video}} height="360px" crossorigin="anonymous"></video>
                             <drawing id="draw" rectangle-list='rectangles'></drawing>
                             <div class="controls">
