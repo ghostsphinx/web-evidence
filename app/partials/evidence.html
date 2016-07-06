@@ -5,20 +5,73 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" onclick="eraseTest()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Stream server settings</h4>
+                    <h4 class="modal-title" id="myModalLabel">Streaming server</h4>
                 </div>
                 <div class="modal-body">
-                    In this window, you will be able to define how you will stream the videos that will be annotated. Do not forget to click to call the first annotation if you are beginning. When you click to test your server, if the two images are alike, it is working properly.
-                    </br></br></br>
-                    Define new path:
-                    <div ng-controller="ParameterButtonCtrl">
-                        <form id="save" ng-submit="saveVideoPreferences()">
-                            <input id="localServerInput" type="text" class="form-control" ng-model="model.videoPath">
-                        </form>
-                    </div>
-                    </br>
-                    <table>
+                  <p>
+                    Because usage agreements do not allow streaming videos directly to the participants, each participant must install a streaming server in their own facilities.
+                  </p>
+                  <h4>Setting up your own streaming server</h4>
+                  <p>
+                    <ul>
+                      <li>
+                        Install NodeJS <code>http-server</code> by following these <a href="https://github.com/indexzero/http-server">instructions</a>.
+                      </li>
+                      <li>
+                        Make sure videos from the three corpora (INA, DW and 3-24) are organized as follows in the same directory (hereafter denoted __ROOT__):
+  <pre>__ROOT__/INA/snowden/F2_TS/*/*.mp4
+__ROOT__/INA/snowden/F5_TS/*/*.mp4
+__ROOT__/DW/DW-news-DE/*.mp4
+__ROOT__/DW/DW-news-EN/*.mp4
+__ROOT__/DW/Euromaxx-EN/*.mp4
+__ROOT__/3-24/*.mp4</pre>
+                      </li>
+                      <li>
+                        Run <code>http-server</code> to server the "mp4" videos:
+                        <pre>
+$ http-server -d false -i false --cors —c __ROOTDIR__
+Starting up http-server, serving __ROOTDIR__ on: http://0.0.0.0:8080</pre>
+                      </li>
+                      <li>
+                        Type in the URL of the streaming server (e.g. <code>http//localhost:8080</code>):
+                        <div ng-controller="ParameterButtonCtrl">
+                            <form id="save" ng-submit="saveVideoPreferences()">
+                                <input id="localServerInput" type="text" class="form-control" ng-model="model.videoPath">
+                            </form>
+                        </div>
+                      </li>
+                    </ul>
+                  </p>
+
+                  <h4>Testing the streaming server</h4>
+                    <p>
+                      Pressing the Test button below will try to seek a specific frame of three different videos of the test set (one for each corpus.)<br/>
+                      If the actual frame correspond to the expected screenshot, then you are good to go!
+                    </p>
+                    <table class="table">
                     <tr>
+                      <th>
+                        Corpus
+                      </th>
+                      <th>
+                        Expected
+                      </th>
+                      <th>
+                        Actual
+                      </th>
+                    </tr>
+                    <tr>
+                        <td>INA</td>
+                        <td><img src="../img/1256.png" style="height:80px; margin-left:15px;"></td>
+                        <td><div id="videoTest"></div></td>
+                    </tr>
+                    <tr>
+                        <td>DW</td>
+                        <td><img src="../img/1256.png" style="height:80px; margin-left:15px;"></td>
+                        <td><div id="videoTest"></div></td>
+                    </tr>
+                    <tr>
+<<<<<<< HEAD
                         <td>
                         <button type="button" class="btn btn-default" onclick="streamTest()">Test</button>
                         </td>
@@ -46,9 +99,17 @@
                     </tr>
                     </table>
                     <label style="position:relative; height:40px;"></label>
+=======
+                        <td>3-24</td>
+                        <td><img src="../img/1256.png" style="height:80px; margin-left:15px;"></td>
+                        <td><div id="videoTest"></div></td>
+                    </tr>
+                    </table>
+                    <button type="button" class="btn btn-default" onclick="streamTest()">Test</button>
+>>>>>>> 0b4b9e8633af36d804538c3b48702aeee65ae0b5
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-click="model.popQueueElement()" data-dismiss="modal">Call the first</button>
+                    <button type="button" class="btn btn-primary" ng-click="model.popQueueElement()" data-dismiss="modal">Let's go!</button>
                 </div>
             </div>
         </div>
