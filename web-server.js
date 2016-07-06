@@ -34,7 +34,7 @@ var password = program.password || process.env.CAMOMILE_PASSWORD;
 var pyannote_api = program.pyannote || process.env.PYANNOTE_API;
 var port = parseInt(program.port || process.env.PORT || '8070', 10);*/
 yamlObject = YAML.load(program.config);
-var camomile_api = yamlObject.camomile.host;
+var camomile_api = 'http://' + yamlObject.camomile.host;
 var login = yamlObject.camomile.username;
 var password = yamlObject.camomile.password;
 var port = 8070;
@@ -205,8 +205,8 @@ function create_config_file(callback) {
                 }
             );
         }
-        ],function(err, result){
-
+        ],function(err, results){
+            //nothing to do
         }
     );
     callback(null);

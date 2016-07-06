@@ -17,11 +17,11 @@ angular.module('myApp.directives')
                     $("#login-password").val($("#password", element).val());
 
                     scope.onSubmit(function () {
-//					$("#login-form")[0].submit(); // wrongly redirects to root hostname
+//          $("#login-form")[0].submit(); // wrongly redirects to root hostname
                         window.location.reload();
                     });
                     return false;
                 };
             }
         };
-    });
+});

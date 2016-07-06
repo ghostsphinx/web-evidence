@@ -15,12 +15,8 @@ angular.module('myApp.controllers')
 
             // Store parameters in the cookies
             $scope.saveVideoPreferences = function () {
-                var now = new Date(),
-                    exp = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate());
-
-                Cookies.set("use.default.video.path", $scope.model.useDefaultVideoPath, {
-                    expires: exp
-                });
+                var now = new Date();
+                var exp = new Date(now.getFullYear(),now.getMonth()+1, now.getDate());
 
                 Cookies.set("video.path", $scope.model.videoPath, {
                     expires: exp
