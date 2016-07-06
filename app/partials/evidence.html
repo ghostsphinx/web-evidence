@@ -74,7 +74,7 @@ Starting up http-server, serving __ROOTDIR__ on: http://0.0.0.0:8080</pre>
                         </td>
                         <td>
                             <img src="../img/0110.png" style="height:80px; margin-left:15px;">
-                        </td> 
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
@@ -86,7 +86,7 @@ Starting up http-server, serving __ROOTDIR__ on: http://0.0.0.0:8080</pre>
                         </td>
                         <td>
                             <div id="videoTest3" style="margin-top:50px;"></div>
-                        </td>  
+                        </td>
                     </tr>
                     </table>
                     <label style="position:relative; height:40px;"></label>
@@ -104,13 +104,22 @@ Starting up http-server, serving __ROOTDIR__ on: http://0.0.0.0:8080</pre>
                     <label id="message" style="color:red;"></label>
                 </div>
                 <div class="row">
-                    <div class="col-md-10 col-xs-12">
+                    <div class="col-md-12 col-xs-12">
                         <div class="input-group">
+                          <div class="input-group-addon">
+                          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </div>
                             <form ng-submit="model.addEntry()" class="ng-pristine ng-valid">
-                                <input id="entry_input" name="entry_input" type="text" style="font-size:25px;height:50px;" class="form-control ng-pristine ng-valid" ng-model="model.user_input.person_name" ng-change="model.updateLabel()" data-toggle="popover" title="Step 1" data-placement="left" data-content="Read the name carefully" data-trigger="manual">
+                                <input id="entry_input" name="entry_input" type="text" style="font-size:25px;height:50px;" class="form-control ng-pristine ng-valid" ng-model="model.user_input.person_name" ng-change="model.updateLabel()"
+                                       data-toggle="popover" title="Step 1a | person name" data-placement="left"
+                                       data-content="Edit the name if it is incorrect or type in the correct name if you can. Remember to use firstname_lastname convention." data-trigger="manual">
                             </form>
                             <span class="input-group-btn">
-                                <button type="button" id="btnnk" class="btn btn-danger" style="height:50px;" ng-click="model.saveQueueElement('ko')" data-toggle="popover" title="Step 2" data-placement="right" data-container="body" data-content="If it is not a name, click here" data-trigger="manual">This is not a name</button>
+                                <button type="button" id="btnnk" class="btn btn-danger" style="height:50px;" ng-click="model.saveQueueElement('ko')"
+                                        data-toggle="popover" title="Step 1b | not a person name" data-placement="left" data-container="body"
+                                        data-content="Use this when the text does not refer to a person." data-trigger="manual">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
                             </span>
                         </div>
                     </div>
@@ -118,7 +127,10 @@ Starting up http-server, serving __ROOTDIR__ on: http://0.0.0.0:8080</pre>
                 </br>
                 <div class="row">
                     <div class="col-md-12 col-xs-12">
-                        <div id="video-container" data-toggle="popover" title="Step 5" data-placement="left" data-content="If the annotation is right, draw a box around the face on the video" data-trigger="manual" ng-mouseup="model.updateValidInput()">
+                        <div id="video-container"
+                             data-toggle="popover" title="Step 2 | bounding box" data-placement="left"
+                             data-content="Draw a bounding box around face on the video. You may browse the video to find a location where the face is more frontal."
+                             data-trigger="manual" ng-mouseup="model.updateValidInput()">
                             <video id="player" cm-video-player ng-src={{model.video}} height="360px" crossorigin="anonymous"></video>
                             <drawing id="draw" rectangle-list='rectangles'></drawing>
                             <div class="controls">
@@ -140,14 +152,28 @@ Starting up http-server, serving __ROOTDIR__ on: http://0.0.0.0:8080</pre>
                     </div>
                 </div>
                 <div class="row" ng-show="model.isDisplayedVideo">
-                    <div class="col-md-10 col-xs-12" style="margin:auto;">
+                    <div class="col-md-12 col-xs-12" style="margin:auto;">
                         <div id="not_evidence_button_id">
                             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                 <div class="btn-group" role="group">
-                                    <button type="button" id="btnno" class="btn btn-danger btn-lg" ng-click="model.saveQueueElement('no')" data-toggle="popover" title="Step 3" data-placement="bottom" data-content="If the annotation is wrong, click here" data-trigger="manual">Wrong annotation</button>
+                                    <button type="button" id="btnno" class="btn btn-danger btn-lg" ng-click="model.saveQueueElement('no')"
+                                            data-toggle="popover"
+                                            title="Step 1c | wrong person"
+                                            data-placement="top"
+                                            data-content="Use this when the person whose name is proposed is not visible."
+                                            data-trigger="manual">
+                                      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Wrong person
+                                    </button>
                                 </div>
                                 <div class="btn-group" role="group">
-                                    <button type="button" id="btndk" class="btn btn-default btn-lg" ng-click="model.saveQueueElement('?')" data-toggle="popover" title="Step 4" data-placement="bottom" data-content="If you don't know, click here" data-trigger="manual">I don't know</button>
+                                    <button type="button" id="btndk" class="btn btn-default btn-lg" ng-click="model.saveQueueElement('?')"
+                                            data-toggle="popover"
+                                            title="Step 1d | not sure"
+                                            data-placement="top"
+                                            data-content="Use this when you are not sure what to decide. It is always better to say 'I don't know' than making a wrong guess."
+                                            data-trigger="manual">
+                                      <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> I am not sure
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -158,10 +184,14 @@ Starting up http-server, serving __ROOTDIR__ on: http://0.0.0.0:8080</pre>
                 <div class="row" ng-show="model.isDisplayedVideo">
                     <div class="col-md-12 col-xs-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading" id="panhead" data-toggle="popover" title="Step 6" data-placement="top" data-content="Verify the name you will send" data-trigger="manual">
+                            <div class="panel-heading" id="panhead" data-toggle="popover"
+                                 title="Step 3a | person name" data-placement="bottom"
+                                 data-content="Double check that the name is correct." data-trigger="manual">
                                 <label id="label_name"></label>
                             </div>
-                            <div class="panel-body" id="panbody" data-toggle="popover" title="Step 7" data-placement="right" data-content="Verify the image you will send" data-trigger="manual">
+                            <div class="panel-body" id="panbody" data-toggle="popover"
+                                 title="Step 3b | face" data-placement="left"
+                                 data-content="Double check that the bounding box is correct. It should contain the whole head whenever possible." data-trigger="manual">
                                 <canvas id="recup" style="position:relative; display:none;"></canvas>
                                 <canvas id="evid" style="position:relative; display:none;"></canvas>
                                 <div id="evidenceImages" style="float:left; width:100%">
@@ -171,7 +201,12 @@ Starting up http-server, serving __ROOTDIR__ on: http://0.0.0.0:8080</pre>
                             <div class="panel-footer">
                                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                     <div class="btn-group" role="group">
-                                        <button type="button" id="confirm" class="btn btn-success btn-lg" disabled="disabled" ng-click="model.saveQueueElement('yes')" style="margin:auto;" data-toggle="popover" title="Step 8" data-placement="bottom" data-content="Send your annotation" data-trigger="manual">Validation</button>
+                                        <button type="button" id="confirm" class="btn btn-success btn-lg" disabled="disabled"
+                                        ng-click="model.saveQueueElement('yes')" style="margin:auto;"
+                                        data-toggle="popover" title="Step 4 | validation" data-placement="bottom"
+                                        data-content="Use this once your job is done." data-trigger="manual">
+                                          <span class="glyphicon glyphicon-check" aria-hidden="true"></span> Save
+                                        </button>
                                     </div>
                                 </div>
                             </div>
