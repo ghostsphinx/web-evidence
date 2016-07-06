@@ -47,7 +47,9 @@ angular.module('myApp.controllers')
 			// rename from "initQueueData" to "popQueueElement"
 			$scope.model.popQueueElement = function () {
 
-				document.getElementById('videoTest').innerHTML = "";
+				document.getElementById('videoTest1').innerHTML = "";
+				document.getElementById('videoTest2').innerHTML = "";
+				document.getElementById('videoTest3').innerHTML = "";
 				// Get queue first element and pop it from the queue
 				camomileService.dequeue($scope.model.incomingQueue, function (err, item) {
 
@@ -72,6 +74,7 @@ angular.module('myApp.controllers')
 
 					$scope.model.q = item;
 					$scope.model.user_input.person_name = $scope.model.q.person_name;
+					document.getElementById('label_name').innerHTML = $scope.model.q.person_name;
 					$scope.model.initialData = $scope.model.q.person_name;
 
 					// Update the add entry button's status
@@ -117,7 +120,7 @@ angular.module('myApp.controllers')
 			// Event launched when click on the save button.
 			$scope.model.saveQueueElement = function (isEvidence) {
 
-				if (document.getElementById('evidence').src == "") {
+				if (document.getElementById('evidence').src == "" && isEvidence =="yes") {
 					document.getElementById("message").innerHTML = "Please draw a bounding box around the face.";
 					return;
 				}
