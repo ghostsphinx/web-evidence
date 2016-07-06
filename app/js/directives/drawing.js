@@ -143,6 +143,10 @@ angular.module('myApp.directives').directive('drawing', function(){
         document.getElementById('evidence').src = canvasE.toDataURL("image/png", 1.0);
       }
 
+      document.getElementById('player').addEventListener("pause", function() {
+          var ratio = 360*document.getElementById('player').videoWidth/document.getElementById('player').videoHeight;
+          copy(document.getElementById("Xbox").value*ratio,document.getElementById("Ybox").value*360,document.getElementById("Wbox").value*ratio,document.getElementById("Hbox").value*360);
+      });
     }
   };
 });
