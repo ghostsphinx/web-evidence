@@ -23,24 +23,26 @@ angular.module('myApp.controllers')
 			});
 
 			function invalidInput(){
-    			var re = /^[a-z_]+$/;
+    			var re = /^[a-z_]+[a-z]$/;
     			if(!re.test(document.getElementById('entry_input').value)) document.getElementById('message').innerHTML = "The name can only contains letter from a to z and _";
     			else document.getElementById('message').innerHTML = "";
     		}
 
     		$scope.model.updateValidInput = function(){
     			invalidInput();
-    			var re = /^[a-z_]+$/;
+    			var re = /^[a-z_]+[a-z]$/;
         		if(!re.test(document.getElementById('entry_input').value) || document.getElementById("Wbox").value == "") document.getElementById('confirm').disabled = "disabled";
 				else document.getElementById('confirm').disabled = "";
     		}
 
     		$scope.model.updateLabel = function(){
-        		document.getElementById('label_name').innerHTML = document.getElementById('entry_input').value;
-        		var re = /^[a-z_]+$/;
         		invalidInput();
+        		var re = /^[a-z_]+[a-z]$/;
         		if(!re.test(document.getElementById('entry_input').value) || document.getElementById("Wbox").value == "") document.getElementById('confirm').disabled = "disabled";
-				else document.getElementById('confirm').disabled = "";
+				else {
+					document.getElementById('confirm').disabled = "";
+					document.getElementById('label_name').innerHTML = document.getElementById('entry_input').value;
+				}
     		};
 
 			$scope.model.incomingQueue = $rootScope.queues.evidenceIn;
