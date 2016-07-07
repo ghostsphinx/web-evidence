@@ -187,6 +187,7 @@ angular.module('myApp.controllers')
 				document.getElementById("Xbox").value = "";
 				document.getElementById("Ybox").value = "";
 				document.getElementById("message").innerHTML = "";
+				document.getElementById('confirm').disabled = "disabled";
 
 				camomileService.enqueue($scope.model.outgoingQueue, item, function (err, data) {
 
@@ -236,7 +237,7 @@ angular.module('myApp.controllers')
 					//Left
 					if (event.keyCode == 37) {
 						$scope.$apply(function () {
-							if ($scope.model.current_time - 0.04 > $scope.model.infbndsec) {
+							if ($scope.model.current_time - 0.04 > $scope.model.infbndsec && targetID != "entry_input") {
 								$scope.model.current_time = $scope.model.current_time - 0.04;
 							} else {
 								$scope.model.current_time = $scope.model.infbndsec;
@@ -246,7 +247,7 @@ angular.module('myApp.controllers')
 					//Right
 					if (event.keyCode == 39) {
 						$scope.$apply(function () {
-							if ($scope.model.current_time + 0.04 < $scope.model.supbndsec) {
+							if ($scope.model.current_time + 0.04 < $scope.model.supbndsec && targetID != "entry_input") {
 								$scope.model.current_time = $scope.model.current_time + 0.04;
 							} else {
 								$scope.model.current_time = $scope.model.supbndsec;
@@ -256,7 +257,7 @@ angular.module('myApp.controllers')
 					//Up
 					if (event.keyCode == 38) {
 						$scope.$apply(function () {
-							if ($scope.model.current_time - 1 > $scope.model.infbndsec) {
+							if ($scope.model.current_time - 1 > $scope.model.infbndsec && targetID != "entry_input") {
 								$scope.model.current_time = $scope.model.current_time - 1;
 							} else {
 								$scope.model.current_time = $scope.model.infbndsec;
@@ -267,7 +268,7 @@ angular.module('myApp.controllers')
 					if (event.keyCode == 40) {
 						$scope.$apply(function () {
 
-							if ($scope.model.current_time + 1 < $scope.model.supbndsec) {
+							if ($scope.model.current_time + 1 < $scope.model.supbndsec && targetID != "entry_input") {
 								$scope.model.current_time = $scope.model.current_time + 1;
 							} else {
 								$scope.model.current_time = $scope.model.supbndsec;
