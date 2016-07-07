@@ -24,7 +24,7 @@ angular.module('myApp.controllers')
 
 			function invalidInput(){
     			var re = /^[a-z_]+[a-z]$/;
-    			if(!re.test(document.getElementById('entry_input').value)) document.getElementById('message').innerHTML = "The name can only contains letter from a to z and _";
+    			if(!re.test(document.getElementById('entry_input').value)) document.getElementById('message').innerHTML = ""<code>firstname_lastname</code> you may only use underscore <code>_</code> or unaccented lower case letters <code>a-z</code>.";
     			else document.getElementById('message').innerHTML = "";
     		}
 
