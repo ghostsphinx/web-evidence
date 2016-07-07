@@ -35,8 +35,8 @@ Starting up http-server, serving __ROOTDIR__ on: http://0.0.0.0:8080</pre>
                       <li>
                         Type in the URL of the streaming server (e.g. <code>http//localhost:8080</code>):
                         <div ng-controller="ParameterButtonCtrl">
-                            <form id="save" ng-submit="saveVideoPreferences()">
-                                <input id="localServerInput" type="text" class="form-control" ng-model="model.videoPath">
+                            <form id="save">
+                                <input id="localServerInput" type="text" class="form-control" ng-model="model.videoPath" ng-blur="saveVideoPreferences()">
                             </form>
                         </div>
                       </li>
