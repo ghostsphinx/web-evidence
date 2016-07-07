@@ -41,8 +41,8 @@ angular.module('myApp.controllers')
         		if(!re.test(document.getElementById('entry_input').value) || document.getElementById("Wbox").value == "") document.getElementById('confirm').disabled = "disabled";
 				else {
 					document.getElementById('confirm').disabled = "";
-					document.getElementById('label_name').innerHTML = document.getElementById('entry_input').value;
 				}
+				if(re.test(document.getElementById('entry_input').value)) document.getElementById('label_name').innerHTML = document.getElementById('entry_input').value;
     		};
 
 			$scope.model.incomingQueue = $rootScope.queues.evidenceIn;
