@@ -50,9 +50,9 @@ function streamTest(){
         document.getElementById('videoTest2').innerHTML = html;
         document.getElementById('playertest2').currentTime = 28;
         document.getElementById('playertest2').pause();
-        html = '<video id="playertest3" src="'+path+'/INA/snowden/F2_TS/20130607/130607FR20000_B.MPG.mp4" height="80px" style="margin-top:-40px; margin-left:15px;" crossorigin="anonymous"></video>';
+        html = '<video id="playertest3" src="'+path+'/INA/snowden/F2_TS/20130610/130610FR20600_B.MPG.mp4" height="80px" style="margin-top:-40px; margin-left:15px;" crossorigin="anonymous"></video>';
         document.getElementById('videoTest3').innerHTML = html;
-        document.getElementById('playertest3').currentTime = 70;
+        document.getElementById('playertest3').currentTime = 6*60+49;
         document.getElementById('playertest3').pause();
     }
 function eraseTest(){
