@@ -1,2 +1,2 @@
 angular.module('myApp.config', [])
-   .value('DataRoot', 'http://camomile.mediaeval.niderb.fr')
+   .value('DataRoot', 'http://camomile.mediaeval.niderb.fr:80')
