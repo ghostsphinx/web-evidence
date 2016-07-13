@@ -12,8 +12,7 @@ angular.module('myApp.controllers')
             defaults: defaults,
             Session: Session
         });
-
-        console.log("sessionCtrl");
+        
         $scope.login = function (submit) {
             var username = $("#login").val();
             var password = $("#password").val();
