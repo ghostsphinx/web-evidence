@@ -22,12 +22,14 @@ angular.module('myApp.controllers')
 				Session: Session
 			});
 
+			//Display in the interface if the name is not correctly written according to the format firstname_lastname
 			function invalidInput(){
     			var re = /^[a-z_]+[a-z]$/;
     			if(!re.test(document.getElementById('entry_input').value)) document.getElementById('message').innerHTML = "You may only use underscore <code>_</code> or unaccented lower case letters <code>a-z</code>.";
     			else document.getElementById('message').innerHTML = "";
     		}
 
+    		//Enabled or not the validation button according to the input name
     		$scope.model.updateValidInput = function(){
     			invalidInput();
     			var re = /^[a-z_]+[a-z]$/;
@@ -35,6 +37,7 @@ angular.module('myApp.controllers')
 				else document.getElementById('confirm').disabled = "";
     		}
 
+    		//Change the field "preview name" above the preview image according to the input
     		$scope.model.updateLabel = function(){
         		invalidInput();
         		var re = /^[a-z_]+[a-z]$/;
@@ -70,6 +73,7 @@ angular.module('myApp.controllers')
 			// rename from "initQueueData" to "popQueueElement"
 			$scope.model.popQueueElement = function () {
 
+				//Clear the server test to prevent multiple videos read at the same time
 				document.getElementById('videoTest1').innerHTML = "";
 				document.getElementById('videoTest2').innerHTML = "";
 				document.getElementById('videoTest3').innerHTML = "";
@@ -91,6 +95,7 @@ angular.module('myApp.controllers')
 					//$scope.model.resetTransparentPlan();
 					$scope.model.updateIsDisplayedVideo(true);
 
+					//Warn the user if the name is pronounced
 					if (item.modality === "pronounced") {
 						document.getElementById("message").innerHTML = "WARNING: The person name might be pronounced !";
 					}
@@ -113,6 +118,7 @@ angular.module('myApp.controllers')
 								});
 							}
 						},
+						//Prepare the bounds and the current position of the video
 						function (err, results) {
 							$scope.model.video = results.video;
 							$scope.model.serverDate = results.serverDate;
@@ -143,6 +149,7 @@ angular.module('myApp.controllers')
 			// Event launched when click on the save button.
 			$scope.model.saveQueueElement = function (isEvidence) {
 
+				//Warn the user that he needs a bounding box to validate an evidence
 				if (document.getElementById('evidence').src == "" && isEvidence =="yes") {
 					document.getElementById("message").innerHTML = "Please draw a bounding box around the face.";
 					return;
@@ -180,6 +187,7 @@ angular.module('myApp.controllers')
 					item.output.bounding_box = b_box;
 				}
 
+				//Reset the elements for the next annotation
 				document.getElementById('evidence').src = "../img/default.jpg";
 				document.getElementById('draw').children[0].width = document.getElementById('draw').children[0].width;
 				document.getElementById("Wbox").value = "";

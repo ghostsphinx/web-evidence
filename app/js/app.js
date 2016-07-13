@@ -40,6 +40,7 @@ angular.module(
 
 }]);
 
+//Function that set the server test
 function streamTest(){
         var path = document.getElementById("localServerInput").value;
         var html = '<video id="playertest1" src="'+path+'/3-24/0121200000DVBT6x1.mp4" height="80px" style="margin-top:-40px; margin-left:15px;" crossorigin="anonymous"></video>';
@@ -54,7 +55,8 @@ function streamTest(){
         document.getElementById('videoTest3').innerHTML = html;
         document.getElementById('playertest3').currentTime = 6*60+49;
         document.getElementById('playertest3').pause();
-    }
+}
+//Function to erase the server test to prevent multiple videos playing at the same time
 function eraseTest(){
         document.getElementById('videoTest1').innerHTML = "";
         document.getElementById('videoTest2').innerHTML = "";
