@@ -66,7 +66,7 @@ angular.module('myApp.directives')
                   			element[0].currentTime = scope.model.infbndsec;
                   			scope.model.toggle_play(true);
               			}
-
+              			scope.model.current_time = element[0].currentTime;
                     });
                 });
 
