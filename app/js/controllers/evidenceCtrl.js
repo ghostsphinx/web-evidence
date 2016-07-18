@@ -185,6 +185,10 @@ angular.module('myApp.controllers')
 				document.getElementById("Ybox").value = "";
 				document.getElementById("message").innerHTML = "";
 				document.getElementById('confirm').disabled = "disabled";
+				document.getElementById('confirm').blur();
+                document.getElementById('btnnk').blur();
+                document.getElementById('btnno').blur();
+                document.getElementById('btndk').blur();
 
 				camomileService.enqueue($scope.model.outgoingQueue, item, function (err, data) {
 
@@ -217,18 +221,8 @@ angular.module('myApp.controllers')
 					}
 					//space
 					if (event.keyCode == 32 && targetID != "entry_input") {
-						if (button_checked) {
-							event.target.blur();
-						}
 						$scope.$apply(function () {
 							$scope.model.toggle_play();
-						});
-					}
-					//esc-> skip
-					if (event.keyCode == 27) {
-						$scope.$apply(function () {
-							//skip
-							//$scope.model.saveQueueElement(false);
 						});
 					}
 					//Left
