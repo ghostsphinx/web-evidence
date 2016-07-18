@@ -49,7 +49,7 @@ angular.module('myApp.directives')
 
 				scope.model.play_label = "Play";
 
-				element[0].addEventListener("loadedmetadata", function () {
+				element[0].addEventListener("loadeddata", function () {
 					scope.$apply(function () {
 						element[0].currentTime = scope.model.current_time;
 					});

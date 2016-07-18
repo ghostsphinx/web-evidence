@@ -182,6 +182,7 @@ angular.module('myApp.controllers')
                 document.getElementById('btnno').blur();
                 document.getElementById('btndk').blur();
                 $scope.model.play_label = "Play";
+                document.getElementById('player').src = "";
 
 				camomileService.enqueue($scope.model.outgoingQueue, item, function (err, data) {
 
