@@ -124,19 +124,8 @@ angular.module('myApp.controllers')
 							$scope.model.serverDate = results.serverDate;
 							$scope.model.clientDate = Date.now();
 
-							$scope.model.restrict_toggle = 2;
-							$scope.model.current_time_temp = $scope.model.q.t;
-							$scope.model.infbndsec = parseFloat($scope.model.q.t || 0);
-							$scope.model.infbndsec-=5.0;
-							if ($scope.model.infbndsec < 0) {
-								$scope.model.infbndsec = 0;
-							}
-							$scope.model.supbndsec = parseFloat($scope.model.q.t || 0);
-							$scope.model.supbndsec+=5.0;
-							if ($scope.model.supbndsec > $scope.model.fullDuration) {
-								$scope.model.supbndsec = $scope.model.fullDuration;
-							}
-							$scope.model.duration = $scope.model.supbndsec - $scope.model.infbndsec;
+							$scope.model.infbndsec = parseFloat($scope.model.q.t-5.0 || 0);
+							$scope.model.supbndsec = parseFloat($scope.model.q.t+5.0 || 0);
 
 							$scope.$apply(function () {
 								$scope.model.current_time = $scope.model.q.t;

@@ -131,7 +131,7 @@ Starting up http-server, serving __ROOTDIR__ on: http://0.0.0.0:8080</pre>
                              data-toggle="popover" title="Step 2 | bounding box" data-placement="left"
                              data-content="Draw a bounding box around face on the video. You may browse the video to find a location where the face is more frontal."
                              data-trigger="manual" ng-mouseup="model.updateValidInput()">
-                            <video id="player" cm-video-player ng-src={{model.video}} height="360px" crossorigin="anonymous"></video>
+                            <video id="player" cm-video-player ng-src={{model.video}} height="360px" crossorigin="anonymous" loop></video>
                             <drawing id="draw" rectangle-list='rectangles'></drawing>
                             <div class="controls">
                                 <div id="play-button">

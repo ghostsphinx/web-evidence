@@ -7,9 +7,8 @@ angular.module('myApp.directives')
 			restrict: 'A',
 			link: function (scope, element) {
 				scope.model.play_state = false;
-				scope.model.current_time = 0;
-				scope.model.restrict_toggle = 0;
-				scope.model.infbndsec = 0;
+				scope.model.current_time;
+				scope.model.infbndsec;
 				scope.model.loop = true;
 
 				//add a loop button for controlling looping
@@ -49,7 +48,7 @@ angular.module('myApp.directives')
 
 				scope.model.play_label = "Play";
 
-				element[0].addEventListener("loadeddata", function () {
+				element[0].addEventListener("loadedmetadata", function () {
 					scope.$apply(function () {
 						element[0].currentTime = scope.model.current_time;
 					});
@@ -69,10 +68,6 @@ angular.module('myApp.directives')
 
                     });
                 });
-
-				scope.$watch("model.current_time", function (currentTime_new) {
-					element[0].currentTime = currentTime_new;
-				});
 
 				scope.$watch("model.play_state", function (newValue) {
 					if (newValue) {
