@@ -7,7 +7,7 @@ angular.module('myApp.directives')
 			restrict: 'A',
 			link: function (scope, element) {
 				scope.model.play_state = false;
-				scope.model.current_time;
+				scope.model.current_time = 0;
 				scope.model.infbndsec;
 				scope.model.loop = true;
 
@@ -42,6 +42,7 @@ angular.module('myApp.directives')
 
 				}).on('mouseup', function () {
 						scope.$apply(function () {
+							element[0].currentTime = scope.model.view_current_time;
 							scope.model.toggle_play(save_state);
 						});
 					});
@@ -76,7 +77,6 @@ angular.module('myApp.directives')
 						scope.model.play_label = "Play";
 					}
 				});
-
 			}
 		};
 	}]);

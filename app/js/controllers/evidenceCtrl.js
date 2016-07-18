@@ -7,14 +7,6 @@ angular.module('myApp.controllers')
 
 		function ($document, $sce, $scope, $http, defaults, $controller, Session, $rootScope, camomileService) {
 
-			/*import MissPlete from './MissPlete.js';
-
-        	new MissPlete({
-            	input: document.querySelector('input[name="entry_input"]'),
-
-            	options: [["Barcelona", "BCN"], ["San Francisco", "SF"]]
-        	});*/
-
 			$controller('CommonCtrl', {
 				$scope: $scope,
 				$http: $http,
@@ -189,6 +181,7 @@ angular.module('myApp.controllers')
                 document.getElementById('btnnk').blur();
                 document.getElementById('btnno').blur();
                 document.getElementById('btndk').blur();
+                $scope.model.play_label = "Play";
 
 				camomileService.enqueue($scope.model.outgoingQueue, item, function (err, data) {
 
