@@ -144,7 +144,7 @@ angular.module('myApp.directives').directive('drawing', function(){
 
       document.getElementById('player').addEventListener("pause", function() {
           var ratio = 360*document.getElementById('player').videoWidth/document.getElementById('player').videoHeight;
-          copy(document.getElementById("Xbox").value*ratio,document.getElementById("Ybox").value*360,document.getElementById("Wbox").value*ratio,document.getElementById("Hbox").value*360);
+          if(document.getElementById("Wbox").value > 0) copy(document.getElementById("Xbox").value*ratio,document.getElementById("Ybox").value*360,document.getElementById("Wbox").value*ratio,document.getElementById("Hbox").value*360);
       });
     }
   };
