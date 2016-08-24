@@ -181,6 +181,8 @@ angular.module('myApp.controllers')
                 document.getElementById('btnnk').blur();
                 document.getElementById('btnno').blur();
                 document.getElementById('btndk').blur();
+                $scope.model.view_current_time = 0.0;
+                $scope.model.current_time_display = 0.0;
                 $scope.model.play_label = "Play";
                 document.getElementById('player').src = "";
 
